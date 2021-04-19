@@ -1,7 +1,6 @@
-﻿  Source.cpp
-C:\Users\May\source\repos\Game Engine\Game Engine\Source.cpp(7,35): error C2061: syntax error: identifier 'Vector2'
-C:\Users\May\source\repos\Game Engine\Game Engine\Source.cpp(11,30): error C2059: syntax error: ')'
-  Vector.cpp
+﻿  Engine.cpp
+C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(11,30): error C2059: syntax error: ')'
   Vector2.cpp
   Generating Code...
+C:\Users\May\source\repos\Game Engine\Game Engine\Vector2.cpp(41): error C4716: 'Vector2::rotate': must return a value
 C:\Users\May\source\repos\Game Engine\Game Engine\Vector2.cpp(37): error C4716: 'Vector2::rotate': must return a value
