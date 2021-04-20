@@ -1,8 +1,10 @@
 #pragma once
 #include <SDL.h>
 #include <queue>
+#include <vector>
 
 #include "Vector2.h"
+#include "GameObject.h"
 
 class Engine
 {
@@ -16,14 +18,18 @@ private:
 	SDL_Surface* surface = NULL;
 	SDL_Renderer* renderer = NULL;
 
+	std::vector<GameObject*> gameObjects;
 	std::queue<Vector2> renderBus;
 	
-	bool running;
-
 	int width;
 	int height;
 
+	bool running = false;
+
+	void logic();
+	void draw();
 	void update();
+
 	void exit();
 
 	void drawLine(Vector2);

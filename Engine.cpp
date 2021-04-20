@@ -27,7 +27,43 @@ int Engine::init() {
 		return 1;
 	}
 
+	gameObjects.clear();
+
+	std::vector<Vector2> lines;
+
+	Vector2 line0 = Vector2(Vector(0, 0), Vector(0, 10));
+	Vector2 line1 = Vector2(Vector(10, 10), Vector(5, 10));
+	Vector2 line2 = Vector2(Vector(5, 10), Vector(0, 0));
+
+	lines.push_back(line0);
+	lines.push_back(line1);
+	lines.push_back(line2);
+
+	Shape triangle = Shape(ShapeType::TRIANGLE, &lines);
+	GameObject obj = GameObject(true, true, Vector(width / 2, height / 2), &triangle);
+
+	gameObjects.push_back(&obj);
+
 	return 0;
+}
+
+void Engine::draw() {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+	while (!renderBus.empty()) {
+		drawLine(renderBus.front());
+		renderBus.pop();
+	}
+}
+
+void Engine::logic() {
+	GameObject* gameObj = gameObjects.front();
+	Shape* shape = gameObj->getShape();
+	std::vector<Vector2>* lines = shape->getLines();
+
+	std::cout << lines;
 }
 
 void Engine::run() {
@@ -35,6 +71,9 @@ void Engine::run() {
 
 	while (running) {
 		handleInput();
+		logic();
+		draw();
+		update();
 	}
 
 	exit();
@@ -52,7 +91,6 @@ void Engine::handleInput() {
 			case SDL_QUIT:
 				running = false;
 				break;
-
 		}
 	}
 }
@@ -70,9 +108,6 @@ void Engine::drawLine(Vector2 line) {
 	Vector start = line.getStart();
 	Vector end = line.getEnd();
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderDrawLine(renderer, start.getX(), start.getY(), end.getX(), end.getY());
 }
 
