@@ -1,7 +1,0 @@
-﻿  Engine.cpp
-C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(15,79): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(15,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(15,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(15,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\May\source\repos\Game Engine\Game Engine\Engine.cpp(20,12): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
-  Game Engine.vcxproj -> C:\Users\May\source\repos\Game Engine\x64\Debug\Game Engine.exe

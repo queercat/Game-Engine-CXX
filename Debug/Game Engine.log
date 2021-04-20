@@ -1,3 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(501,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found.
-  Source.cpp
-C:\Users\May\Documents\Projects\Includes\SDL2-2.0.14\include\SDL_config.h(196,10): fatal error C1083: Cannot open include file: 'sdkddkver.h': No such file or directory
