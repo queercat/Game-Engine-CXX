@@ -12,6 +12,13 @@ Vector2::Vector2(Vector start, Vector end) {
 	this->end = end;
 }
 
+Vector2::Vector2(bool nullVector) {
+	this->nullVector = nullVector;
+	
+	this->start = Vector();
+	this->end = Vector();
+}
+
 Vector Vector2::getStart() {
 	return start;
 }
@@ -69,6 +76,10 @@ double Vector2::getMagnitude() {
 	magnitude += pow(abs(end.getY() - start.getY()), 2);
 
 	return sqrt(magnitude);
+}
+
+bool Vector2::isNull() {
+	return this->nullVector;
 }
 
 void Vector2::print() {

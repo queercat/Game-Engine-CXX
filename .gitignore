@@ -395,7 +395,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 *.vcxproj
-*.vcxproj.*
+*.vcxproj.user
+*.vcxproj.filters
 
 Debug/
 x64/

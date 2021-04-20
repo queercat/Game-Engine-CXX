@@ -1,11 +1,72 @@
-#include <stdio.h>
-#include <SDL.h>
-#include "Vector2.h"
+#include "Engine.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SUCCESS = 0;
+const int FAILURE = 1;
 
-void draw(SDL_Renderer* renderer, Vector2 line) {
+Engine::Engine(int width, int height) {
+	this->width = width;
+	this->height = height;
+}
+
+int Engine::init() {
+	// Attempt to intiailize video.
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		return FAILURE;
+	}
+
+	window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+	
+	// Attempt to initialize the window.
+	if (!window) {
+		return FAILURE;
+	}
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+
+	if (!renderer) {
+		return 1;
+	}
+
+	return 0;
+}
+
+void Engine::run() {
+	running = true;
+
+	while (running) {
+		handleInput();
+	}
+
+	exit();
+}
+
+void Engine::handleInput() {
+	SDL_Event event;
+
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+			case SDL_KEYUP:
+				handleKeyEvent(&event.key);
+				break;
+
+			case SDL_QUIT:
+				running = false;
+				break;
+
+		}
+	}
+}
+
+void Engine::handleKeyEvent(SDL_KeyboardEvent* key) {	
+	switch (key->keysym.sym) {
+		case (SDLK_ESCAPE): {
+			running = false;
+			break;
+		}
+	}
+}
+
+void Engine::drawLine(Vector2 line) {
 	Vector start = line.getStart();
 	Vector end = line.getEnd();
 
@@ -15,42 +76,12 @@ void draw(SDL_Renderer* renderer, Vector2 line) {
 	SDL_RenderDrawLine(renderer, start.getX(), start.getY(), end.getX(), end.getY());
 }
 
-void update(SDL_Renderer* renderer) {
+void Engine::update() {
 	SDL_RenderPresent(renderer);
 	SDL_Delay(.1);
 }
 
-int main(int argc, char* args[]) {
-	SDL_Window* window = NULL;
-	SDL_Surface* screenSurface = NULL;
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		return 1;
-	} 
-
-	window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-
-	if (!window) {
-		return 1;
-	} 
-		
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-
-	if (!renderer) {
-		return 1;
-	}
-
-	Vector2 line = Vector2(Vector(0, 0), Vector(SCREEN_WIDTH, SCREEN_HEIGHT));
-
-	for (;;) {
-		draw(renderer, line);
-		update(renderer);
-
-		line = line.rotate(1, Vector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
-	}
-
+void Engine::exit() {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-
-	return 0;
 }
