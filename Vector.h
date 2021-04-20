@@ -10,6 +10,9 @@ public:
 	Vector multiply(Vector);
 	Vector divide(Vector);
 
+	Vector rotate(double);
+	Vector rotate(double, Vector);
+
 	double getX();
 	double getY();
 

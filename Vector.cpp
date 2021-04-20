@@ -35,6 +35,29 @@ Vector Vector::divide(Vector dividend) {
 	return divVector;
 }
 
+// Assuming we're rotating around the origin.
+Vector Vector::rotate(double degrees) {
+	return this->rotate(degrees, Vector(0, 0));
+}
+
+Vector Vector::rotate(double degrees, Vector origin) {
+	double theta = (degrees * 3.14159265) / 180;
+	
+	double xOrigin = origin.getX();
+	double yOrigin = origin.getY();
+
+	double xAdj = x - xOrigin;
+	double yAdj = y - yOrigin;
+
+	double xRotation = cos(theta) * xAdj - sin(theta) * yAdj;
+	double yRotation = sin(theta) * xAdj + cos(theta) * yAdj;
+
+	xRotation += xOrigin;
+	yRotation += yOrigin;
+
+	return Vector(xRotation, yRotation);
+}
+
 double Vector::getX() {
 	return x;
 }

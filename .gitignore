@@ -393,3 +393,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+*.vcxproj
+
+debug/
+x64/
